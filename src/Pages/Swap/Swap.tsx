@@ -11,6 +11,7 @@ import { WalletModal } from "../../Components/Common/WalletModal";
 import { useWallet } from "@lifi/widget/providers";
 import type { Route } from "@lifi/sdk";
 import type { RouteExecutionUpdate } from "@lifi/widget";
+import { pinJSONToIPFSAndReturnCid } from "../../utils/utils";
 // import { useWallet } from './WalletProvider'
 
 const Swap = () => {
@@ -77,8 +78,12 @@ const Swap = () => {
       console.log("Route execution updated", update);
       // console.log('onRouteExecutionUpdated fired.');
     };
-    const onRouteExecutionCompleted = (route: Route) => {
+    const onRouteExecutionCompleted = async (route: Route) => {
       console.log("Route execution completed", route);
+      const data = route;
+      delete data.steps;
+      const cid = await pinJSONToIPFSAndReturnCid(data);
+      console.log("CID", cid);
       // console.log('onRouteExecutionCompleted fired.');
     };
     const onRouteExecutionFailed = (update: RouteExecutionUpdate) => {

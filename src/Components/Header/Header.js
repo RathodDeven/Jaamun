@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ConnectButton from "../ConnectButton/ConnectButton";
 
 const Header = () => {
   const MenuItems = [
@@ -20,7 +21,7 @@ const Header = () => {
     <div>
       <div className="bg-black-600 py-4">
         <div className="container mx-auto">
-          <div className="flex">
+          <div className="flex flex-row">
             {MenuItems.map((item) => {
               return (
                 <Link key={item.url} to={item.url}>
@@ -30,6 +31,7 @@ const Header = () => {
                 </Link>
               );
             })}
+            <ConnectButton />
           </div>
         </div>
       </div>

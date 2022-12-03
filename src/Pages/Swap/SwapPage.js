@@ -3,7 +3,7 @@ import Swap from "./Swap";
 
 const SwapPage = () => {
   return (
-    <div>
+    <div className="pt-10">
       <Swap />
     </div>
   );
