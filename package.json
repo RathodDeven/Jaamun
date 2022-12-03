@@ -1,14 +1,28 @@
 {
-  "name": "jamoon",
+  "name": "temp",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.7.1",
+    "@lifi/wallet-management": "^1.2.1",
+    "@lifi/widget": "^1.26.3",
+    "@memester-xyz/lens-use": "^0.1.1",
+    "@rainbow-me/rainbowkit": "^0.8.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^29.2.3",
+    "@types/node": "^18.11.10",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "antd": "^5.0.3",
+    "buffer": "^6.0.3",
+    "ethers": "^5.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.4",
     "react-scripts": "5.0.1",
+    "wagmi": "^0.8.8",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -34,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "typescript": "^4.9.3"
   }
 }
