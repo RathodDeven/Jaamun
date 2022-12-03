@@ -84,6 +84,8 @@ const Swap = () => {
       delete data.steps;
       const cid = await pinJSONToIPFSAndReturnCid(data);
       console.log("CID", cid);
+
+      // swap(cid) call this contract using biconomy provider and signer
       // console.log('onRouteExecutionCompleted fired.');
     };
     const onRouteExecutionFailed = (update: RouteExecutionUpdate) => {
