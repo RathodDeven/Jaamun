@@ -17,6 +17,7 @@ module.exports = {
   },
   plugins: ["react", "prettier"],
   rules: {
+    "no-unused-vars": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
     "array-callback-return": "off",
