@@ -82,6 +82,7 @@ const Swap = () => {
       console.log("Route execution completed", route);
       const data = route;
       delete data.steps;
+      delete data.tags;
       const cid = await pinJSONToIPFSAndReturnCid(data);
       console.log("CID", cid);
 
