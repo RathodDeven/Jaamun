@@ -66,7 +66,9 @@ const Wrapper = ({ children }) => {
     <WagmiConfig client={wagmiClient}>
       <ApolloProvider client={apolloClient}>
         <RainbowKitProvider coolMode chains={chains} theme={midnightTheme()}>
-          <LensWrapperProvider>{children}</LensWrapperProvider>
+          <LensWrapperProvider>
+            {children}
+            </LensWrapperProvider>
           {/* {children} */}
         </RainbowKitProvider>
       </ApolloProvider>
