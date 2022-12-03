@@ -20,12 +20,12 @@
       "jsx": "preserve"
     },
     "include": [
-      "next-env.d.ts",
       "**/*.ts",
-      "**/*.tsx"
-  , "pages/search.js"  ],
+      "**/*.tsx", 
+      "pages/search.js"  
+    ],
     "exclude": [
       "node_modules"
     ]
-  }
+}
   
