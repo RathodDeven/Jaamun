@@ -1,15 +1,15 @@
 export const setAccessToken = (token) => {
-  sessionStorage.setItem("accessToken", token);
+  localStorage.setItem("accessToken", token);
 };
 
 export const setRefreshToken = (token) => {
-  sessionStorage.setItem("refreshToken", token);
+  localStorage.setItem("refreshToken", token);
 };
 
 export const getAccessToken = () => {
-  return sessionStorage.getItem("accessToken");
+  return localStorage.getItem("accessToken");
 };
 
 export const getRefreshToken = () => {
-  return sessionStorage.getItem("refreshToken");
+  return localStorage.getItem("refreshToken");
 };

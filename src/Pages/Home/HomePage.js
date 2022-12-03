@@ -2,6 +2,8 @@ import {
   useAuthenticate,
   //   useAuthenticate,
   useChallenge,
+  useProfile,
+  // useFollow,
 } from "@memester-xyz/lens-use";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import React, { useEffect, useState } from "react";
@@ -25,7 +27,8 @@ const HomePage = () => {
     address,
     signedChallenge
   );
-
+  // const { follow, loading, error } = useFollow("0x0150b2");
+  const { data: profile } = useProfile("stani.lens");
   useEffect(() => {
     if (!signedChallenge) return;
     authenticate();
@@ -52,9 +55,9 @@ const HomePage = () => {
 
   console.log("isLensLoggedIn", isLensLoggedIn);
 
-  //   useEffect(() => {
-
-  //   },[])
+  useEffect(() => {
+    console.log(profile);
+  }, [profile]);
   return (
     <div>
       <ConnectButton />
@@ -73,6 +76,15 @@ const HomePage = () => {
           setShow(false);
         }}
       />
+      {/* <button
+        onClick={() => {
+          follow();
+        }}
+      >
+        Follow boredhead.lens
+      </button>
+      {loading && <div>Loading...</div>}
+      {error && <div>Error : {error.message} </div>} */}
     </div>
   );
 };

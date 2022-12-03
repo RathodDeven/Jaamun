@@ -17,6 +17,8 @@ import { setContext } from "@apollo/client/link/context";
 import "@rainbow-me/rainbowkit/styles.css";
 import { getAccessToken } from "../../utils/token";
 import { LensWrapperProvider } from "./LensWrapperProvider";
+// import { LensWrapperProvider } from "./LensWrapperProvider";
+// import { QueryClient, QueryClientProvider } from "react-query";
 
 const API_URL = "https://api.lens.dev";
 
@@ -39,6 +41,8 @@ const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+// const queryClient = new QueryClient();
+
 const Wrapper = ({ children }) => {
   const { chains, provider } = configureChains(
     [chain.polygonMumbai, chain.goerli],
@@ -60,11 +64,12 @@ const Wrapper = ({ children }) => {
   });
   return (
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider coolMode chains={chains} theme={midnightTheme()}>
-        <ApolloProvider client={apolloClient}>
+      <ApolloProvider client={apolloClient}>
+        <RainbowKitProvider coolMode chains={chains} theme={midnightTheme()}>
           <LensWrapperProvider>{children}</LensWrapperProvider>
-        </ApolloProvider>
-      </RainbowKitProvider>
+          {/* {children} */}
+        </RainbowKitProvider>
+      </ApolloProvider>
     </WagmiConfig>
   );
 };
