@@ -16,6 +16,10 @@ const Header = () => {
       title: "Swap",
       url: "/swap",
     },
+    {
+      title: "How it works",
+      url: "/howitworks",
+    },
   ];
   return (
     <div>

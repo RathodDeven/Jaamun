@@ -19,6 +19,14 @@ function App() {
         <Routes>
           <Route index element={<NewHomePage />} />
           <Route path="/swap/*" element={<SwapPage />} />
+          <Route
+            path="/howitworks"
+            element={
+              <div className="w-full h-full bg-black">
+                <img src="/all.png" className="w-full h-full" />
+              </div>
+            }
+          />
           <Route path="/traders/" element={<TradersPage />} />
           <Route path="/traders/:id" element={<TraderProfile />} />
           <Route path="/chart" element={<ChartList />} />
