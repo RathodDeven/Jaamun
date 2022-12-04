@@ -11,17 +11,71 @@ import { WalletModal } from "../../Components/Common/WalletModal";
 import { useWallet } from "@lifi/widget/providers";
 import type { Route } from "@lifi/sdk";
 import type { RouteExecutionUpdate } from "@lifi/widget";
-import { connectWallet, pinJSONToIPFSAndReturnCid } from "../../utils/utils";
+import { pinJSONToIPFSAndReturnCid } from "../../utils/utils";
 import StepsContainer from "../../Components/Steps/StepsContainer";
+
+// import { Biconomy } from "@biconomy/mexa";
+// import { ethers } from "ethers";
+// import JaMoon from "../../utils/JaMoon.json";
 // import { useWallet } from './WalletProvider'
 
-const Swap = () => {
+const Swap = ({ callSwap }) => {
   const { disconnect, account, addToken, addChain } = useWallet();
   const [showConnectModal, setShowConnectModal] = useState<{
     show: boolean;
     promiseResolver?: Function;
   }>({ show: false });
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(-1);
+
+  // const Swap = async (cid) => {
+  //   // const res = await connectWallet(cid, account?.address);
+  //   // const provider = account?.signer.provider;
+  //   // console.log(provider);
+  //   try {
+  //     const biconomy = new Biconomy(window.ethereum, {
+  //       apiKey: "a25b3acc-2d71-4658-a189-0f5eb0fc8a15",
+  //       debug: true,
+  //     });
+  //     // await window.ethereum.enable();
+  //     // if (!(window.ethereum.networkVersion === "137")) {
+  //     //   alert("Please switch to matic mumbai");
+  //     // }
+  //     const providerBiconomy = new ethers.providers.Web3Provider(biconomy);
+
+  //     // biconomy.addListener(biconomy).onEvent(biconomy.READY, () => {
+  //     //   // Initialize your dapp here like getting user accounts etc
+  //     // }).onEvent(biconomy.ERROR, (error, message) => {
+  //     //   // Handle error while initializing mexa
+  //     // });
+  //     const signer = providerBiconomy.getSigner();
+  //     const contract = new ethers.Contract(
+  //       "0x7DA6dA0B39085568aA91bdA0a8E8043E8713eBBB",
+  //       JaMoon,
+  //       signer
+  //     );
+
+  //     // const nonce = await JaMoon.contract.methods.getNonce(address).call();
+  //     // console.log(nonce);
+
+  //     // const ContractName = JaMoon.contractName;
+  //     const functionSignature = JaMoon.contract.methods.swap(cid).encodeABI();
+  //     console.log(functionSignature);
+  //     const res = await contract.swap(cid);
+  //     const receipt = await res.wait();
+
+  //     if (receipt.status === 1) {
+  //       console.log(
+  //         "Domain minted! https://rinkeby.etherscan.io/tx/" + res.hash
+  //       );
+  //       return res.hash;
+  //     } else {
+  //       alert("Transaction failed! Please try again");
+  //     }
+  //   } catch (error) {
+  //     console.log("Please allow access to connect to web3 ");
+  //   }
+  //   console.log("res", res);
+  // };
 
   const widgetConfig: WidgetConfig = useMemo(() => {
     return {
@@ -73,35 +127,36 @@ const Swap = () => {
 
   useEffect(() => {
     const onRouteExecutionStarted = (route: Route) => {
+      setStep(0);
       console.log("Route execution started", route);
       // console.log('onRouteExecutionStarted fired.');
     };
-    const onRouteExecutionUpdated = (update: RouteExecutionUpdate) => {
-      console.log("Route execution updated", update);
-      // console.log('onRouteExecutionUpdated fired.');
-    };
-    const onRouteExecutionCompleted = async (route: Route) => {
-      console.log("Route execution completed", route);
-      setStep(step + 1);
-      const data = route;
-      delete data.steps;
-      delete data.tags;
-      console.log(data);
-      const cid = await pinJSONToIPFSAndReturnCid(data);
-      setStep(step + 1);
-      console.log("CID", cid);
-      //
+    // const onRouteExecutionUpdated = (update: RouteExecutionUpdate) => {
+    //   console.log("Route execution updated", update);
+    //   // console.log('onRouteExecutionUpdated fired.');
+    // };
 
-      // swap(cid) call this contract using biconomy provider and signer
+    const onRouteExecutionCompleted = async (route: Route) => {
       try {
-        await Swap(cid);
+        console.log("Route execution completed", route);
+        setStep(1);
+        const data = route;
+        delete data.steps;
+        delete data.tags;
+        console.log(data);
+        const cid = await pinJSONToIPFSAndReturnCid(data);
+        setStep(2);
+        console.log("CID", cid);
+        // calling contract function here
+        await callSwap(cid);
+        // swap(cid) call this contract using biconomy provider and signer
       } catch (err) {
         console.log(err);
       }
 
       // console.log('onRouteExecutionCompleted fired.');
       // swap here
-      setStep(step + 1);
+      setStep(3);
     };
     const onRouteExecutionFailed = (update: RouteExecutionUpdate) => {
       console.log("Route execution failed", update);
@@ -109,7 +164,6 @@ const Swap = () => {
     };
 
     widgetEvents.on(WidgetEvent.RouteExecutionStarted, onRouteExecutionStarted);
-    widgetEvents.on(WidgetEvent.RouteExecutionUpdated, onRouteExecutionUpdated);
     widgetEvents.on(
       WidgetEvent.RouteExecutionCompleted,
       onRouteExecutionCompleted
@@ -118,11 +172,6 @@ const Swap = () => {
 
     return () => widgetEvents.all.clear();
   }, [widgetEvents]);
-
-  const Swap = async (cid) => {
-    const res = await connectWallet(cid, account?.address);
-    console.log("res", res);
-  };
 
   return (
     <>
