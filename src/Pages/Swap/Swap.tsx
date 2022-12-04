@@ -11,7 +11,7 @@ import { WalletModal } from "../../Components/Common/WalletModal";
 import { useWallet } from "@lifi/widget/providers";
 import type { Route } from "@lifi/sdk";
 import type { RouteExecutionUpdate } from "@lifi/widget";
-import { pinJSONToIPFSAndReturnCid } from "../../utils/utils";
+import { connectWallet, pinJSONToIPFSAndReturnCid } from "../../utils/utils";
 // import { useWallet } from './WalletProvider'
 
 const Swap = () => {
@@ -81,11 +81,18 @@ const Swap = () => {
     const onRouteExecutionCompleted = async (route: Route) => {
       console.log("Route execution completed", route);
       const data = route;
-      delete data.steps;
+      delete data.tags;
+      console.log("data", data);
       const cid = await pinJSONToIPFSAndReturnCid(data);
       console.log("CID", cid);
 
       // swap(cid) call this contract using biconomy provider and signer
+      try {
+        await Swap(cid);
+      } catch (err) {
+        console.log(err);
+      }
+
       // console.log('onRouteExecutionCompleted fired.');
     };
     const onRouteExecutionFailed = (update: RouteExecutionUpdate) => {
@@ -103,6 +110,11 @@ const Swap = () => {
 
     return () => widgetEvents.all.clear();
   }, [widgetEvents]);
+
+  const Swap = async (cid) => {
+    const res = await connectWallet(cid, account?.address);
+    console.log("res", res);
+  };
 
   return (
     <>

@@ -1,0 +1,1 @@
+[{"anonymous":false,"inputs":[{"indexed":false,"internalType":"string","name":"cid","type":"string"}],"name":"Swap","type":"event"},{"inputs":[{"internalType":"string","name":"cid","type":"string"}],"name":"swap","outputs":[],"stateMutability":"nonpayable","type":"function"}]
