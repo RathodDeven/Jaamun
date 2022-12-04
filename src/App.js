@@ -16,7 +16,6 @@ function App() {
       {/* <Wrapper> */}
       <BrowserRouter>
         <Header />
-
         <Routes>
           <Route index element={<NewHomePage />} />
           <Route path="/swap/*" element={<SwapPage />} />
