@@ -7,7 +7,14 @@ const NewHomePage = () => {
         🫐 JaMoon - Indexing Li.Fi. Swaps Through The Graph
       </div>
       <div className="w-full text-center text-2xl pt-10">
-        View DeFi Token Swaps Details Across Chains as You wish 🚀
+        View DeFi Token Swaps Details Across Chains as You wish 🚀{" "}
+        <a
+          href="https://thegraph.com/hosted-service/subgraph/rathoddeven/jamoonthegraph"
+          target={"_blank"}
+          rel="noreferrer"
+        >
+          <span className="text-blue-500">View Subgraph</span>
+        </a>
       </div>
       <div className="flex flex-row w-full justify-around">
         <img src="/mainImage.jpg" className="w-[500px] m-[70px]" />
