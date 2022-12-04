@@ -10,7 +10,7 @@ const Header = () => {
     },
     {
       title: "Charts",
-      url: "/charts",
+      url: "/chart",
     },
     {
       title: "Swap",

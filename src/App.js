@@ -6,6 +6,7 @@ import SwapPage from "./Pages/Swap/SwapPage";
 import ChartsPage from "./Pages/Charts/ChartsPage";
 import NewHomePage from "./Pages/Home/NewHomePage";
 import Header from "./Components/Header/Header";
+import ChartList from "./Pages/Charts/ChartList";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         <Routes>
           <Route index element={<NewHomePage />} />
           <Route path="/swap/*" element={<SwapPage />} />
-          <Route path="/charts" element={<ChartsPage />} />
+          <Route path="/chart" element={<ChartList />} />
+          <Route path="/chart/:id" element={<ChartsPage />} />
         </Routes>
       </BrowserRouter>
       {/* </Wrapper> */}

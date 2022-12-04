@@ -9,6 +9,34 @@ import reportWebVitals from "./reportWebVitals";
 // import { WalletProvider } from "@lifi/widget/providers";
 import MasterWrapper from "./Components/Common/MasterWrapper";
 import "./index.css";
+// import { Biconomy } from "@biconomy/mexa";
+// import { ethers } from "ethers";
+// import JaMoon from "./utils/JaMoon.json";
+
+// const biconomy = new Biconomy(window.ethereum, {
+//   apiKey: "e8e28b81-65b5-4952-b689-e2aa650dee1e",
+//   debug: true,
+//   contractAddresses: ["0x2F5D8F645c7FD35e3Abd86231624fB9f6672C13E"], // list of contract address you want to enable gasless on
+// });
+// // To create contract instances you can do:
+// const contractInstance = new ethers.Contract(
+//   "0x2F5D8F645c7FD35e3Abd86231624fB9f6672C13E",
+//   JaMoon,
+//   biconomy.ethersProvider
+// );
+
+// biconomy
+//   .onEvent(biconomy.READY, async () => {
+//     setWeb3ConnectStatus(1);
+
+//     window.ethereum.on("accountsChanged", function (accounts) {
+//       setUserAddress(accounts[0]);
+//     });
+//   })
+//   .onEvent(biconomy.ERROR, (err, message) => {
+//     alert(message);
+//     console.log(err, message);
+//   });
 
 // const API_URL = "https://api.lens.dev";
 
