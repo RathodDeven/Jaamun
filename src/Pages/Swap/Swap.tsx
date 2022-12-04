@@ -12,6 +12,7 @@ import { useWallet } from "@lifi/widget/providers";
 import type { Route } from "@lifi/sdk";
 import type { RouteExecutionUpdate } from "@lifi/widget";
 import { pinJSONToIPFSAndReturnCid } from "../../utils/utils";
+import StepsContainer from "../../Components/Steps/StepsContainer";
 // import { useWallet } from './WalletProvider'
 
 const Swap = () => {
@@ -20,6 +21,7 @@ const Swap = () => {
     show: boolean;
     promiseResolver?: Function;
   }>({ show: false });
+  const [step, setStep] = useState(0);
 
   const widgetConfig: WidgetConfig = useMemo(() => {
     return {
@@ -80,14 +82,20 @@ const Swap = () => {
     };
     const onRouteExecutionCompleted = async (route: Route) => {
       console.log("Route execution completed", route);
+      setStep(step + 1);
       const data = route;
       delete data.steps;
       delete data.tags;
+      console.log(data);
       const cid = await pinJSONToIPFSAndReturnCid(data);
+      setStep(step + 1);
       console.log("CID", cid);
+      //
 
       // swap(cid) call this contract using biconomy provider and signer
       // console.log('onRouteExecutionCompleted fired.');
+      // swap here
+      setStep(step + 1);
     };
     const onRouteExecutionFailed = (update: RouteExecutionUpdate) => {
       console.log("Route execution failed", update);
@@ -118,6 +126,7 @@ const Swap = () => {
           setShowConnectModal({ show: false, promiseResolver: undefined });
         }}
       />
+      <StepsContainer step={step} />
     </>
   );
 };
